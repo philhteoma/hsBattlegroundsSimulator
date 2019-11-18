@@ -1,0 +1,16 @@
+Name,Tier,Tribe,Attack,Health,Taunt,Poison,Shield,Deathrattle,StaticEffect,PersonalEffect,Token
+Alleycat,1,Beast,1,1,False,False,False,,,,False
+Tabbycat,1,Beast,1,1,False,False,False,,,,True
+Dire Wolf Alpha,1,Best,2,2,False,False,False,,dire_wolf_alpha_se,,False
+Mecharoo,1,Mech,1,1,False,False,False,mecharoo_dr,,,False
+Jo-E Bot,1,Mech,1,1,False,False,False,,,,True
+Micro Machine,1,Mech,1,2,False,False,False,,,,False
+Murloc Tidecaller,1,Murloc,1,2,False,False,False,,,murloc_tidecaller_pe,False
+Murloc Tidehunter,1,Murloc,2,1,False,False,False,,,,False
+Murloc Scout,1,Murloc,1,1,False,False,False,,,,True
+Righteous Protector,1,None,1,1,True,False,True,,,,False
+Rockpool Hunter,1,Murloc,2,3,False,False,False,,,,False
+Selfless Hero,1,None,2,1,False,False,False,selfess_hero_dr,,,False
+Voidwalker,1,Demon,1,3,True,False,False,,,,False
+Vulgar Homunculus,1,Demon,2,4,True,False,False,,,,False
+Wrath Weaver,1,None,1,1,False,False,False,,,,False

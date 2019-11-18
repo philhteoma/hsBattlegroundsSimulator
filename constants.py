@@ -1,0 +1,1 @@
+MAX_MINION_COUNT = 7
