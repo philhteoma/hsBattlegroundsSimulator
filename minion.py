@@ -19,14 +19,21 @@ class Minion:
         self.hasPoisonous = specs["Poison"]
         self.hasDivineShield = specs["Shield"]
         
+        self.hasAttacked = False
+        self.isDead = False
+        
+        self.parentMinions = None
+        
         self.onHitEffects = []
+        self.onHitTriggers = []
+        
         self.deathrattles = []
         self.staticEffects = []
         self.personalEffects = []
         
         self.abilities = self.set_initial_abilities(specs)
         
-        self.playerNumber = None
+        self.boardNumber = None
     
     def isTribe(self, tribeToCheck):
         """
@@ -58,4 +65,18 @@ class Minion:
     def set_board_number(self, number):
         self.boardNumber = number
     
+    
+    def receive_attack(self, attackingMinion):
+        if self.hasDivineShield:
+            self.hasDivineShield == False
+        else:
+            startHealth = self.currentHealth
+            self.currentHealth -= attackingMinion.attack
+            if self.currentHealth < startHealth:
+                self.onHitTriggers = [x for x in self.personalEffects if x.effectType == "on_damage"]
+                if attackingMinion.hasPoisonous:
+                    self.isDead = True
+                if self.currentHealth <= 0:
+                    self.isDead = True
+                
         

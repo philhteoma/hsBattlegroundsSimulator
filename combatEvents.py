@@ -1,32 +1,31 @@
 import random
 
 class CombatEvent:
-    def __init__(self, manager):
-        self.manager = manager
+    pass
 
 
 class ChooseAttackTarget(CombatEvent):
     name = "choose_attack_target"
-    super().__init__()
-        
     
-    def run(self):
-        self.manager.attackingMinion = self.manager.get_active_board().get_leftmost_minion()
-        attackableTargets = self.manager.get_inactive_board().get_attackable_targets()
-        self.manager.defendingMinion = random.choice(attackableTargets)
-        self.manager.combatStack.append(Fight(self.manager))
+    def run(self, manager):
+        manager.attackingMinion = manager.get_active_board().get_leftmost_minion()
+        attackableTargets = manager.get_inactive_board().get_attackable_targets()
+        manager.defendingMinion = random.choice(attackableTargets)
+        manager.combatStack.append(Fight())
     
 
 class Fight(CombatEvent):
     name = "fight"
-    super().__init__()
     
-    def run(self):
-        self.manager.defendingMinion.recieveAttack(self.manager.attackingMinion)
-        self.manager.attackingMinion.recieveAttack(self.manager.defendingMinion)
-        onHitEffects = [self.manager.attackingMinion.get_on_hit_triggers()] + [self.manager.defendingMinion.get_on_hit_triggers()]
+    def run(self, manager):
+        print("Attacking Minion: {} (Player{})".format(manager.attackingMinion.name, manager.get_active_board().boardNumber))
+        print("Defending Minion: {} (Player{})".format(manager.defendingMinion.name, manager.get_inactive_board().boardNumber))
+        manager.attackingMinion.receive_attack(manager.defendingMinion)
+        manager.defendingMinion.receive_attack(manager.attackingMinion)
+        onHitEffects = manager.attackingMinion.get_on_hit_triggers() + manager.defendingMinion.get_on_hit_triggers()
         if onHitEffects:
-            pass
+            print(onHitEffects)
+            manager.combatStack = onHitEffects + manager.combatStack
         
 
 

@@ -1,30 +1,34 @@
 from minion import Minion
 from playerBoard import PlayerBoard
 from minionRepository import MinionRepository
+from gameManager import GameManager
 
 def print_playerBoard(board):
-    strings = [get_minion_print_strings(x) for x in board.minions]
-    
-    pivotStrings = []
-    for i in range(len(strings[0])):
-        lines = [x[i] for x in strings]
-        unNest = [x for y in lines for x in y]
-        pivotStrings.append("|" + "".join(unNest))
-    
-    print()
-    print("\n".join(pivotStrings))
-    print()
-    
-    for dr in board.deathrattles:
-        print("{}-{} has deathrattle \"{}\"".format(dr.minion.name, dr.minion.id, dr.text))
-    
-    for se in board.staticEffects:
-        print("{}-{} has static effect \"{}\"".format(se.minion.name, se.minion.id, se.text))
-    
-    for pe in board.personalEffects:
-        print("{}-{} has personal effect \"{}\"".format(pe.minion.name, pe.minion.id, pe.text))
-    
-    print()
+    if len(board.minions) > 0:
+        strings = [get_minion_print_strings(x) for x in board.minions]
+        
+        pivotStrings = []
+        for i in range(len(strings[0])):
+            lines = [x[i] for x in strings]
+            unNest = [x for y in lines for x in y]
+            pivotStrings.append("|" + "".join(unNest))
+        
+        print()
+        print("\n".join(pivotStrings))
+        print()
+        
+        for dr in board.deathrattles:
+            print("{}-{} has deathrattle \"{}\"".format(dr.minion.name, dr.minion.id, dr.text))
+        
+        for se in board.staticEffects:
+            print("{}-{} has static effect \"{}\"".format(se.minion.name, se.minion.id, se.text))
+        
+        for pe in board.personalEffects:
+            print("{}-{} has personal effect \"{}\"".format(pe.minion.name, pe.minion.id, pe.text))
+        
+        print()
+    else:
+        print("Player {} board is empty".format(board.boardNumber))
 
 def get_minion_print_strings(minion):
     lineOne = minion.name + "-" + str(minion.id)
@@ -61,10 +65,59 @@ if __name__ == "__main__":
 
     
     print_playerBoard(board)
+    
+    manager = GameManager("static_data/minions.csv")
+    manager.assign_minion_to_board(repo.create_minion("Micro Machine"), 1)
+    manager.assign_minion_to_board(repo.create_minion("Selfless Hero"), 1)
+    manager.assign_minion_to_board(repo.create_minion("Alleycat"), 2)
+    manager.assign_minion_to_board(repo.create_minion("Dire Wolf Alpha"), 2)
+    
+    print("Starting Boards")
+    print("------------------")
+    print_playerBoard(manager.get_player_board(1))
+    print()
+    print_playerBoard(manager.get_player_board(2))
+    print()
 
     
+    manager.set_first_player()
+    manager.run_full_combat()
     
+    print()
+    print("Ending Boards")
+    print("-----------------")
+    print_playerBoard(manager.get_player_board(1))
+    print()
+    print_playerBoard(manager.get_player_board(2))
+    print()
     
+    results = []
+    for i in range(10000):
+        manager = GameManager("static_data/minions.csv")
+        manager.assign_minion_to_board(repo.create_minion("Micro Machine"), 1)
+        manager.assign_minion_to_board(repo.create_minion("Selfless Hero"), 1)
+        manager.assign_minion_to_board(repo.create_minion("Alleycat"), 2)
+        manager.assign_minion_to_board(repo.create_minion("Dire Wolf Alpha"), 2)
+        
+        manager.set_first_player()
+        manager.run_full_combat()
+        
+        if len(manager.get_player_board(1).minions) == 0:
+            if len(manager.get_player_board(2).minions) == 0:
+                results.append("Tie")
+            else:
+                results.append(2)
+        else:
+            if len(manager.get_player_board(2).minions) == 0:
+                results.append("Tie")
+            else:
+                results.append(1)
+        
+    print(results)
+    print("1 : ", results.count(1))
+    print("2 : ", results.count(2))
+    print("Tie: ", results.count("Tie"))
+
     
     
     

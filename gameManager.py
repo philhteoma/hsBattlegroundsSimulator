@@ -5,17 +5,22 @@ import random
 
 class GameManager:
     def __init__(self, minionRepo):
-        minionRepo = MinionRepository(csvPath = minionRepo)
+        minionRepo = MinionRepository(csvPath=minionRepo)
         
-        boardOne = PlayerBoard(1)
-        boardTwo = PlayerBoard(2)
+        self.boardOne = PlayerBoard(1)
+        self.boardTwo = PlayerBoard(2)
         
-        _boards = {
-            1 : self.boardOne
-            2 : self.boardTwo
+        self._boards = {
+            1 : self.boardOne,
+            2 : self.boardTwo,
             }
         
-        combatStack = []
+        self.combatStack = []
+        
+        self.activeMinion = {
+            1 : None,
+            2:  None,
+            }
     
     
     def create_minion(self, minionName, isGolden=False):
@@ -36,6 +41,10 @@ class GameManager:
             self.activePlayer = 2
     
     
+    def get_player_board(self, playerNumber):
+        return self._boards[playerNumber]
+    
+    
     def get_active_board(self):
         return self._boards[self.activePlayer]
     
@@ -45,18 +54,42 @@ class GameManager:
         return self._boards[inactivePlayer]
     
     
-    def set_first_player(self, firstPlayer):
+    def set_next_active_minion(self):
+        return self.minions.set_next_active_minion()
+    
+    
+    def set_first_player(self, firstPlayer=None):
         """
             Sets first player if specified, otherwise chooses randomly
         """
         if not firstPlayer:
-            firstPlayer = random.choice(_board.keys()])
+            firstPlayer = random.choice(list(self._boards.keys()))
         self.activePlayer = firstPlayer
+        print("First Player is {}".format(self.activePlayer))
+    
+    
+    def check_for_death(self):
+        activeDead = list(filter(lambda x: x.isDead, self.get_active_board().minions))
+        activeDeathrattles = [x for y in activeDead for x in y.deathrattles]
+        
+        inactiveDead = list(filter(lambda x: x.isDead, self.get_inactive_board().minions))
+        inactiveDeathrattles = [x for y in inactiveDead for x in y.deathrattles]
+        
+        self.combatStack = activeDeathrattles + inactiveDeathrattles + self.combatStack
+        
+        for minion in activeDead:
+            self.get_active_board().remove_minion(minion)
+        
+        for minion in inactiveDead:
+            self.get_inactive_board().remove_minion(minion)
+            
+        for minion in activeDead + inactiveDead:
+            print("{} dies".format(minion.name))
     
     
     def run_full_combat(self, firstPlayer=None):
         # Main Combat Loop
-        while len(boardOne.minions) > 0 and len(boardTwo.minions) > 0:
+        while len(self.boardOne.minions) > 0 and len(self.boardTwo.minions) > 0:
             self.combat_step()
             
         
@@ -65,21 +98,25 @@ class GameManager:
         self.boardTwo.update_minion_data()
         
         
-    def combat_step():
+    def combat_step(self):
         self.flip_active_player()
         starterEvent = get_combat_event("choose_attack_target")
-        activeEvent = starterEvent(self)
+        activeEvent = starterEvent()
         self.combatStack.append(activeEvent)
         
         while len(self.combatStack) > 0:
-            self.combatSubstep()
+            self.combat_substep()
     
     
     def combat_substep(self):
         activeEvent = self.combatStack.pop(0)
-        activeEvent.run()
+        activeEvent.run(self)
         self.refresh_player_boards()
+        if len(self.combatStack) > 0:
+            self.combat_substep()
         self.check_for_death()
+        if len(self.combatStack) > 0:
+            self.combat_substep()
             
                     
                 

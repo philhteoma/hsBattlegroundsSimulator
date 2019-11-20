@@ -1,4 +1,5 @@
 class PersonalEffect:
+    name = "Unnamed Personal Effect"
     def __init__(self, owner):
         self.ownerId = owner.id
 
@@ -12,6 +13,7 @@ class PersonalAnthem(PersonalEffect):
 
 
 class PersonalOnDamage(PersonalEffect):
+    effectType = "on_damage"
     pass
 
 
