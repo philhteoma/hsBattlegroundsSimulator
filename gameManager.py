@@ -5,8 +5,12 @@ import random
 
 class GameManager:
     def __init__(self, minionRepo):
-        minionRepo = MinionRepository(csvPath=minionRepo)
         
+        if "create_minion" not in dir(minionRepo):
+            raise ValueError("minionRepo must have a create_minion method")
+
+        self.minionRepo = minionRepo
+                        
         self.boardOne = PlayerBoard(1)
         self.boardTwo = PlayerBoard(2)
         
@@ -65,7 +69,6 @@ class GameManager:
         if not firstPlayer:
             firstPlayer = random.choice(list(self._boards.keys()))
         self.activePlayer = firstPlayer
-        print("First Player is {}".format(self.activePlayer))
     
     
     def check_for_death(self):
@@ -82,10 +85,7 @@ class GameManager:
         
         for minion in inactiveDead:
             self.get_inactive_board().remove_minion(minion)
-            
-        for minion in activeDead + inactiveDead:
-            print("{} dies".format(minion.name))
-    
+                
     
     def run_full_combat(self, firstPlayer=None):
         # Main Combat Loop
@@ -104,17 +104,19 @@ class GameManager:
         activeEvent = starterEvent()
         self.combatStack.append(activeEvent)
         
+        # Run combat event, then run events until the stack is empty
+        # Then check for death and add any new combat events. Then run until the stack is empty.
+        # Repeat untul the stack is empty after checking for minion death.
         while len(self.combatStack) > 0:
-            self.combat_substep()
+            while len(self.combatStack) > 0:
+                self.combat_substep()
+            self.check_for_death()
     
     
     def combat_substep(self):
         activeEvent = self.combatStack.pop(0)
         activeEvent.run(self)
         self.refresh_player_boards()
-        if len(self.combatStack) > 0:
-            self.combat_substep()
-        self.check_for_death()
         if len(self.combatStack) > 0:
             self.combat_substep()
             
