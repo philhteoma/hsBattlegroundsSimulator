@@ -1,6 +1,6 @@
-This project is intended to simulate battles in Hearthstone Battlegrounds, primarily for the purpose pf working out exactly how unlucky you were when you lost to that board.
+This project is intended to simulate battles in Hearthstone Battlegrounds, primarily for the purpose of working out exactly how unlucky you were when you lost to that board.
 
-This is not intended to be a fully accurate remaking of the Hearthstone engine - such a project would take planning time to ensure everything worked properly. Rather, this just needs to work well enough, which being too much of a hassle to update.
+This is not intended to be a fully accurate remaking of the Hearthstone engine - such a project would take planning time to ensure everything worked properly. Rather, this just needs to work well enough, without being too much of a hassle to update.
 
 Currently, there is only a very basic command line interface. In the future, this will be scaled up to either a web interface, or something else graphical.
 
@@ -10,7 +10,7 @@ Battles can either be run in full using the run_full_combat method, or step by s
 
 ---
 
-Heathstone uses a simlar stack method for resolving game events, similar to Magic the Gathering. However, due to the digital nature of the game, there are some notable differences:
+Heathstone uses stack method for resolving game events, similar to Magic the Gathering. However, due to the digital nature of the game, there are some notable differences:
   - Stacks rarely grow beyond two or three events, since the stack must be cleared before any new action can be taken by a player
   - In magic, if two events would simultaneously enter the stack, their controller can choose which order they enter in. In Heathstone, this is entirely determined programatically.
     - I am currently unsure of the full rules for e.g. deathrattle order resolution in Battlegrounds. Currently, these are corner cases, but over time the simulation should become more accurate
@@ -21,7 +21,7 @@ Events can be added to the stack at almost any time, such as:
   - When a minion is attacked,
   - When a minion deals damage,
   - When a minion receives damage,
-  - When a minion dies.
+  - When a minion dies,
   - When a minion kills another minion,
   - When a minion kills another minion with more damage than its current health,
   - When a minion enters the battlefield,
@@ -32,8 +32,8 @@ Etc., etc.,
 ---
 
 In Battlegrounds, the player has no direct control over the battles their minions fight. Rather, the gameplay loop involves building and managing their army in between rounds, then watching the sparks fly. Minions take turns attacking one at a time, alternating between each player. The attack order for minions is, on the face of it, simple: they attack from left to right. However, there are some complications involved when new minions enter the battlefield.
-  - If minions enter the battlefield to the left of the most recent attacker, they will not attack until the attack order wheels back roudn to them
-  - If they enter to the right, they will attack when the order reaches them
+  - If minions enter the battlefield to the left of the most recent attacker, they will not attack until the attack order wheels back round to them
+  - If they enter to the right, they will attack when the attack order reaches them
   - If the most recent attacking minion caused some minions to enter the battlefield, those minions will attack next.
 This turned out to be more difficult to implement than I imagined - the attack order needs to look at specific minions and their ancestry to determine attack order.
 Since minions will always spawn minions directly to the right of themselves (or, if the spawning minion dies, in its place), it can be assumed that, if that minion is the most recent attacker, the next attacker will be its left-most child.
