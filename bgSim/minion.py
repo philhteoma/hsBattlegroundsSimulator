@@ -1,6 +1,6 @@
-from deathrattles import get_deathrattle
-from staticEffects import get_static_effect
-from personalEffects import get_personal_effect
+from bgSim.deathrattles import get_deathrattle
+from bgSim.staticEffects import get_static_effect
+from bgSim.personalEffects import get_personal_effect
 
 class Minion:
     def __init__(self, specs):

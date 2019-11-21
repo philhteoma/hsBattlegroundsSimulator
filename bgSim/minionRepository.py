@@ -1,4 +1,4 @@
-from minion import Minion
+from bgSim.minion import Minion
 import csv
 
 def parse_bool(string):

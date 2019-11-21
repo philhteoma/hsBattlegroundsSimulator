@@ -1,6 +1,6 @@
-from playerBoard import PlayerBoard
-from minionRepository import MinionRepository
-from combatEvents import get_combat_event
+from bgSim.playerBoard import PlayerBoard
+from bgSim.minionRepository import MinionRepository
+from bgSim.combatEvents import get_combat_event
 import random
 
 class GameManager:

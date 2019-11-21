@@ -1,5 +1,5 @@
 import random
-from gameEvents import SummonEvent
+from bgSim.gameEvents import SummonEvent
 
 
 class Deathrattle:

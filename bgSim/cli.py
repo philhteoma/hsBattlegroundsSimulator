@@ -1,7 +1,7 @@
-from minion import Minion
-from playerBoard import PlayerBoard
-from minionRepository import MinionRepository
-from gameManager import GameManager
+from bgSim.minion import Minion
+from bgSim.playerBoard import PlayerBoard
+from bgSim.minionRepository import MinionRepository
+from bgSim.gameManager import GameManager
 
 def print_playerBoard(board):
     if len(board.minions) > 0:
