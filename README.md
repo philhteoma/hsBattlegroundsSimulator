@@ -8,16 +8,13 @@ Battles are handled through the GameManager object, which much be initialised wi
 
 Battles can either be run in full using the run_full_combat method, or step by step using combat_step and combat_substep methods.
 
-
-
-
+---
 
 Heathstone uses a simlar stack method for resolving game events, similar to Magic the Gathering. However, due to the digital nature of the game, there are some notable differences:
   - Stacks rarely grow beyond two or three events, since the stack must be cleared before any new action can be taken by a player
   - In magic, if two events would simultaneously enter the stack, their controller can choose which order they enter in. In Heathstone, this is entirely determined programatically.
     - I am currently unsure of the full rules for e.g. deathrattle order resolution in Battlegrounds. Currently, these are corner cases, but over time the simulation should become more accurate
   
-
 Events can be added to the stack at almost any time, such as:
   - When any minion attacks,
   - When a specific minion attacks,
@@ -32,8 +29,7 @@ Events can be added to the stack at almost any time, such as:
 
 Etc., etc.,
 
-
-
+---
 
 In Battlegrounds, the player has no direct control over the battles their minions fight. Rather, the gameplay loop involves building and managing their army in between rounds, then watching the sparks fly. Minions take turns attacking one at a time, alternating between each player. The attack order for minions is, on the face of it, simple: they attack from left to right. However, there are some complications involved when new minions enter the battlefield.
   - If minions enter the battlefield to the left of the most recent attacker, they will not attack until the attack order wheels back roudn to them
@@ -47,8 +43,7 @@ There are some notable complications to be accounted for, involving the secrets 
   - Splitting image, unlike the other two secrets, spawns its minion directly to the right of the minion it is attacking. This can be accounted for by treating the new minion as a child of the minion it is copying.
   - "The Beast", upon death, summons a minion for its owners opponent. As this minion spawns in on the right of the board, it can be handled in the same manner as Venomstrike and snake traps.
 
-
-
+---
 
 There are some rules complications involving exactly when minions die which need to be clarified. A notable example is with the minion [Security Rover](https://hearthstone.gamepedia.com/Security_Rover).
 Upon taking damage, Security Rover will spawn a minion to its right. This occurs even when it takes lethal damage (Though not if it is destroyed without taking damage). If the board is full (7 minions is the most a player board can hold), it will fail to spawn a minion.
