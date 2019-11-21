@@ -1,4 +1,4 @@
-from constants import MAX_MINION_COUNT
+from bgSim.constants import MAX_MINION_COUNT
 
 class PlayerBoard:
     def __init__(self, boardNumber):
