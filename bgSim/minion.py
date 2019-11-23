@@ -33,8 +33,7 @@ class Minion:
         self.staticEffects = []
         self.personalEffects = []
         
-        self.abilities = self.set_initial_abilities(specs)
-        
+        self.abilities = self._set_initial_abilities(specs)
         self.boardNumber = None
     
     def isTribe(self, tribeToCheck):
@@ -55,7 +54,7 @@ class Minion:
         return toReturn
     
     
-    def set_initial_abilities(self, specs):
+    def _set_initial_abilities(self, specs):
         if specs["Deathrattle"]:
             self.deathrattles.append(get_deathrattle(specs["Deathrattle"])(self))
         if specs["StaticEffect"]:
@@ -70,14 +69,16 @@ class Minion:
     
     def receive_attack(self, attackingMinion):
         if self.hasDivineShield:
-            self.hasDivineShield = False
+            if attackingMinion.attack > 0:
+                self.hasDivineShield = False
         else:
             startHealth = self.currentHealth
             self.currentHealth -= attackingMinion.attack
             if self.currentHealth < startHealth:
                 self.onHitTriggers = [x for x in self.personalEffects if x.effectType == "on_damage"]
                 if attackingMinion.hasPoisonous:
-                    self.isDead = True
+                    if attackingMinion.attack > 0:
+                        self.isDead = True
                 if self.currentHealth <= 0:
                     self.isDead = True
                 
