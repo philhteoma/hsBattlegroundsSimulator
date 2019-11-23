@@ -41,7 +41,7 @@ class Minion:
         """
             Returns True if requested type matches minion type, or minion type is ALL
         """
-        if self.tribe == trineToCheck or self.tribe == "ALL":
+        if self.tribe == tribeToCheck or self.tribe == "All":
             result = True
         else:
             result = False
