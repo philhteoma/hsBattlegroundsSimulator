@@ -204,3 +204,136 @@ def test_set_next_active_minion_right_minions_children_parent_lives():
     
     assert(minionBoard.activeMinion == minionC)
     assert(minionBoard.boardSnapshot ==  [minionA, minionC, childC1, minionD])
+
+
+def test_set_next_active_minion_loop():
+    masterBoard = MagicMock()
+    minionBoard = MinionBoard(masterBoard)
+    
+    minionA = MagicMock()
+    minionB = MagicMock()
+    minionC = MagicMock()
+    minionD = MagicMock()
+    
+    minionBoard.minions = [minionA, minionB, minionC, minionD]
+    minionBoard.boardSnapshot = [minionA, minionB, minionC, minionD]
+    minionBoard.activeMinion = minionD
+    
+    minionBoard.set_next_active_minion()
+    
+    assert(minionBoard.activeMinion == minionA)
+    assert(minionBoard.boardSnapshot == [minionA, minionB, minionC, minionD])
+
+
+def test_add_minion_with_reference():
+    masterBoard = MagicMock()
+    minionBoard = MinionBoard(masterBoard)
+    
+    minionA = MagicMock()
+    minionB = MagicMock()
+    minionC = MagicMock()
+    
+    newMinion = MagicMock()
+    
+    minionBoard.minions = [minionA, minionB, minionC]
+    minionBoard.add_minion_with_reference(newMinion, minionB)
+    
+    assert(minionBoard.minions == [minionA, minionB, newMinion, minionC])
+
+
+def test_add_minion_with_reference_dead_minion():
+    masterBoard = MagicMock()
+    minionBoard = MinionBoard(masterBoard)
+    
+    minionA = MagicMock()
+    minionB = MagicMock()
+    minionC = MagicMock()
+    
+    newMinion = MagicMock()
+    
+    minionBoard.minions = [minionA, minionC]
+    minionBoard.boardSnapshot = [minionA, minionB, minionC]
+    minionBoard.add_minion_with_reference(newMinion, minionB)
+    
+    assert(minionBoard.minions == [minionA, newMinion, minionC])
+    
+
+def test_add_minion_with_reference_dead_minion_and_child_neighbour():
+    masterBoard = MagicMock()
+    minionBoard = MinionBoard(masterBoard)
+    
+    minionA = MagicMock()
+    minionB = MagicMock()
+    minionC = MagicMock()
+    
+    childA1 = MagicMock()
+    childA2 = MagicMock()
+    childA1.parentMinions = [minionA]
+    childA2.parentMinions = [minionA]
+    
+    newMinion = MagicMock()
+    
+    minionBoard.minions = [childA1, childA2, minionC]
+    minionBoard.boardSnapshot = [minionA, minionB, minionC]
+    minionBoard.add_minion_with_reference(newMinion, minionB)
+    
+    assert(minionBoard.minions == [childA1, childA2, newMinion, minionC])
+
+
+def test_add_minion_with_reference_all_left_minions_dead():
+    masterBoard = MagicMock()
+    minionBoard = MinionBoard(masterBoard)
+    
+    minionA = MagicMock()
+    minionB = MagicMock()
+    minionC = MagicMock()
+    
+    newMinion = MagicMock()
+    
+    minionBoard.minions = [minionC]
+    minionBoard.boardSnapshot = [minionA, minionB, minionC]
+    minionBoard.add_minion_with_reference(newMinion, minionB)
+    
+    assert(minionBoard.minions == [newMinion, minionC])
+
+
+def test_get_active_minion():
+    masterBoard = MagicMock()
+    minionBoard = MinionBoard(masterBoard)
+    
+    minionA = MagicMock()
+    
+    minionBoard.activeMinion = minionA
+    
+    assert(minionBoard.get_active_minion() == minionA)
+
+
+def test_add_minion_to_right():
+    masterBoard = MagicMock()
+    minionBoard = MinionBoard(masterBoard)
+    
+    minionA = MagicMock()
+    minionB = MagicMock()
+    minionC = MagicMock()
+    
+    minionBoard.minions = [minionA, minionB]
+    minionBoard.add_minion_to_right(minionC)
+    
+    assert(minionBoard.minions == [minionA, minionB, minionC])
+
+
+def test_add_minion_to_right_empty_minion_list():
+    masterBoard = MagicMock()
+    minionBoard = MinionBoard(masterBoard)
+    
+    minionA = MagicMock()
+    
+    minionBoard.minions = []
+    minionBoard.add_minion_to_right(minionA)
+    
+    assert(minionBoard.minions == [minionA])
+
+    
+    
+    
+    
