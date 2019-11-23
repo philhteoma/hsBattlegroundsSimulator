@@ -32,13 +32,17 @@ def  test_MecharooDr():
     minion = MagicMock()
     manager = MagicMock()
     
+    board = MagicMock()
+    attrs = {"get_player_board.return_value" : board}
+    manager.configure_mock(**attrs)
+    
     rattle = dr.MecharooDr(minion)
-    rattle.run(mockManager)
+    rattle.run(manager)
     
+    manager.get_player_board.assert_called()
     manager.create_minion.assert_called()
+    board.add_minion_with_reference.assert_called()
     
-    
-
 
 def  test_SelflessHeroDr():
     minion = MagicMock()
@@ -46,3 +50,5 @@ def  test_SelflessHeroDr():
     
     rattle = dr.SelflessHeroDr(minion)
     rattle.run(manager)
+    
+    manager.get_player_board.assert_called()
