@@ -7,7 +7,10 @@ class Deathrattle:
 
 
 class SummonDeathrattle(Deathrattle):
-    pass
+    def summon_minion(self, newMinion, manager):
+        ownerBoard = manager.get_player_board(self.minion.boardNumber)
+        ownerBoard.add_minion_with_reference(newMinion, self.minion)
+        print("{} summons a {}".format(self.minion.name, newMinion.name))
 
 
 class SummonOpponentDeathrattle(Deathrattle):
@@ -37,7 +40,7 @@ class MecharooDr(SummonDeathrattle):
     
     def run(self, manager):
         isGold = self.minion.isGolden
-        minionToSpawn = self.manager.create_minion("Jo-E Bot", isGold)
+        minionToSpawn = manager.create_minion("Jo-E Bot", isGold)
         super().summon_minion(minionToSpawn, manager)
 
 

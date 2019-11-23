@@ -28,7 +28,7 @@ class GameManager:
     
     
     def create_minion(self, minionName, isGolden=False):
-        return minionRepo.create_minion(minionName)
+        return self.minionRepo.create_minion(minionName)
     
     
     def assign_minion_to_board(self, minion, boardNumber, index=-1):

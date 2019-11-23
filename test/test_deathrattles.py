@@ -29,17 +29,20 @@ def  test_OtherDeathrattle():
 
  
 def  test_MecharooDr():
-    mockMinion = MagicMock()
-    mockManager = MagicMock()
+    minion = MagicMock()
+    manager = MagicMock()
     
-    rattle = dr.MecharooDr(mockMinion)
+    rattle = dr.MecharooDr(minion)
     rattle.run(mockManager)
+    
+    manager.create_minion.assert_called()
+    
     
 
 
 def  test_SelflessHeroDr():
-    mockMinion = MagicMock()
-    mockManager = MagicMock()
+    minion = MagicMock()
+    manager = MagicMock()
     
-    rattle = dr.SelflessHeroDr(mockMinion)
-    rattle.run(mockManager)
+    rattle = dr.SelflessHeroDr(minion)
+    rattle.run(manager)

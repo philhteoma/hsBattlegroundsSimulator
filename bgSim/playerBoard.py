@@ -1,4 +1,4 @@
-from bgSim.constants import MAX_MINION_COUNT
+from bgSim.minionBoard import MinionBoard
 
 class PlayerBoard:
     def __init__(self, boardNumber):
@@ -24,6 +24,15 @@ class PlayerBoard:
             Adds a minion at position "index" of the board
         """
         return self.minion.add_minion_at_index(self, minion, index)
+    
+    
+    def add_minion_with_reference(self, newMinion, referenceMinion):
+        """
+            Adds a minion to the right of the reference minion
+            If said minion is no longer on the board, adds it to the right of its previous left neighbour, or that minions children
+            If no left neighbours remain, adds minion at index 0
+        """
+        self.minions.add_minion_with_reference(newMinion, referenceMinion)
         
     
     def remove_minion(self, minion):
@@ -89,100 +98,4 @@ class PlayerBoard:
             Method uses minion order left to right, preserves effect order in minions themselves
         """
         self.deathrattles = [dr for minion in self.minions for dr in minion.deathrattles]
-        
-
-
-class MinionBoard():
-    def __init__(self, masterBoard):
-        self.masterBoard = masterBoard
-        self.activeMinion = None
-        self.theoretialAttackOrder = []
-        self.activeMinionIndex = 0
-        self.minions = []
-        
-    
-    def set_next_active_minion(self):
-        nextActiveMinion = None
-        if childMinions := self.check_for_child_minions(self.activeMinion): # := := := I AM THE WALRUS := := :=
-            nextActiveMinion = childMinions[0]
-        else:
-            for minion in self.theoretialAttackOrder:
-                if minion in self.minions:
-                    nextActiveMinion = minion
-                    break
-                elif childMinions := self.check_for_child_minions(minion):
-                    for cMinion in childMinions:
-                        if cMinion in self.minions:
-                            nextActiveMinion = cMinion
-                            break
-                    if nextActiveMinion:
-                        break
-        
-        if not nextActiveMinion:
-            nextActiveMinion = self.minions[0]
-        
-        self.activeMinion = nextActiveMinion
-        self.activeMinionIndex = self.minions.index(self.activeMinion)
-        self.theoreticalAttackOrder = self.minion[self.activeMinionIndex+1:]
-            
-    
-    def get_active_minion(self):
-        return self.activeMinion
-    
-    
-    def check_for_child_minions(self, minion):
-        """
-            Scans for minions which spawned from the given minion instance
-        """
-        return list(filter(lambda x: minion in x.parentMinions, self.minions))
-    
-    
-    def add_minion_to_right(self, minion):
-        self.theoretialAttackOrder.append(minion) # Hello Finkle Einhorn. Here's the bit which means you won't miss your attack.
-        minion.set_board_number(self.masterBoard.boardNumber)
-        self.add_minion_at_index(minion, len(self.minions))
-        
-        
-    def add_minion_at_index(self, minion, index):
-        if len(self.minions) > MAX_MINION_COUNT:
-            return False
-        else:
-            self.minions.insert(index, minion)
-            minion.set_board_number(self.masterBoard.boardNumber)
-            self.masterBoard.update_minion_data()
-            return True
-    
-
-    def __getitem__(self, index):
-        """
-            Allows the class instance to behave like a list for purposes of iterating, getting items, slicing and similar
-            More info at https://stackoverflow.com/questions/36688966/let-a-class-behave-like-its-a-list-in-python
-        """
-        return self.minions[index]
-    
-    
-    def __len__(self):
-        return len(self.minions)
-    
-    
-    def index(self, index):
-        return self.minions.index(index)
-    
-    
-    def remove(self, item):
-        self.minions.remove(item)
-    
-
-    def print_why_minion_attack_order_is_hell(self):
-        damnedLogic = """
-            So minion attack order works like this
-            Minions attack from left to right. Nice and easy.
-            However, this is complicated by minions that spawn other minions, typically on taking damage, or death.
-            If minions get spawn to the left of the minion that last attacked, those minions don't get to attack until the attack order wheels back round to them.
-            Minions spawned to the right will get to attack in order.
-            Both these things makes sense.
-            However, if the last minion to attack dies and spawns minions, those minions will attack next.
-            """
-        
-        
         

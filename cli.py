@@ -59,7 +59,7 @@ if __name__ == "__main__":
     manager = GameManager(repo)
     manager.assign_minion_to_board(repo.create_minion("Micro Machine"), 1)
     manager.assign_minion_to_board(repo.create_minion("Selfless Hero"), 1)
-    manager.assign_minion_to_board(repo.create_minion("Alleycat"), 2)
+    manager.assign_minion_to_board(repo.create_minion("Mecharoo"), 2)
     manager.assign_minion_to_board(repo.create_minion("Dire Wolf Alpha"), 2)
     
     print("Starting Boards")
@@ -71,7 +71,7 @@ if __name__ == "__main__":
 
     
     manager.set_first_player()
-    manager.run_full_combat()
+    #manager.run_full_combat()
     
     print()
     print("Ending Boards")
@@ -81,6 +81,8 @@ if __name__ == "__main__":
     print_playerBoard(manager.get_player_board(2))
     print()
     
+    
+    """
     results = []
     for i in range(1):
         
@@ -109,7 +111,7 @@ if __name__ == "__main__":
     print("2 : ", results.count(2))
     print("Tie: ", results.count("Tie"))
     print("Error: ", results.count("Error"))
-    
+    """
     
     
     

@@ -20,6 +20,7 @@ class Fight(CombatEvent):
     def run(self, manager):
         manager.attackingMinion.receive_attack(manager.defendingMinion)
         manager.defendingMinion.receive_attack(manager.attackingMinion)
+        print("{} attacks {}".format(manager.attackingMinion.name, manager.defendingMinion.name))
         onHitEffects = manager.attackingMinion.get_on_hit_triggers() + manager.defendingMinion.get_on_hit_triggers()
         if onHitEffects:
             manager.combatStack = onHitEffects + manager.combatStack
