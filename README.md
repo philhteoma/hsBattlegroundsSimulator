@@ -1,3 +1,15 @@
+This project is written in python 3.8. Currently the only method to run it is to navigate to the hsBattleGrounds and run
+
+python3.8 cli.py
+
+To run the test suite:
+
+python3.8 -m pytest
+
+Running this with a python version prior to 3.8 will fail because earlier python versions lack walruses.
+This project in written in 3.8 in appreciation of the [majestic walrus](https://i.redd.it/iat5vyqabtzx.jpg). := := :=
+---
+
 This project is intended to simulate battles in Hearthstone Battlegrounds, primarily for the purpose of working out exactly how unlucky you were when you lost to that board.
 
 This is not intended to be a fully accurate remaking of the Hearthstone engine - such a project would take planning time to ensure everything worked properly. Rather, this just needs to work well enough, without being too much of a hassle to update.
