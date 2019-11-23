@@ -4,7 +4,6 @@ class MinionBoard():
     def __init__(self, masterBoard):
         self.masterBoard = masterBoard
         self.activeMinion = None
-        self.activeMinionIndex = 0
         
         self.minions = []
         self.boardSnapshot = []
@@ -12,12 +11,14 @@ class MinionBoard():
     
     def set_next_active_minion(self):
         nextActiveMinion = None
-        self.theoretialAttackOrder = self.boardSnapshot
-        
-        if childMinions := self.check_for_child_minions(self.activeMinion, self.minions): # := := := I AM THE WALRUS := := :=
+
+        if not self.activeMinion:
+            nextActiveMinion = self.minions[0]
+        elif childMinions := self.check_for_child_minions(self.activeMinion, self.minions): # := := := I AM THE WALRUS := := :=
             nextActiveMinion = childMinions[0]
         else:
-            for minion in self.theoretialAttackOrder:
+            theoretialAttackOrder = self._get_theoretical_attack_order(self.activeMinion)
+            for minion in theoretialAttackOrder:
                 if minion in self.minions:
                     nextActiveMinion = minion
                     break
@@ -33,7 +34,6 @@ class MinionBoard():
             nextActiveMinion = self.minions[0]
         
         self.activeMinion = nextActiveMinion
-        self.activeMinionIndex = self.minions.index(self.activeMinion)
         self.boardSnapshot = self.minions.copy()
             
     
@@ -42,7 +42,7 @@ class MinionBoard():
             Returns a slice of self.boardSnapshot which includes every minion to the right of the provided minion
         """
         minionIndex = self.boardSnapshot.index(minionReference)
-        return self.boardSnapshort[minionIndex+1:]
+        return self.boardSnapshot[minionIndex+1:]
     
     
     def add_minion_with_reference(self, newMinion, referenceMinion):
