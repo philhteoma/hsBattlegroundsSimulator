@@ -1,16 +1,31 @@
-Name,Tier,Tribe,Attack,Health,Taunt,Poison,Shield,Deathrattle,StaticEffect,PersonalEffect,Token
-Alleycat,1,Beast,1,1,False,False,False,,,,False
-Tabbycat,1,Beast,1,1,False,False,False,,,,True
-Dire Wolf Alpha,1,Best,2,2,False,False,False,,dire_wolf_alpha_se,,False
-Mecharoo,1,Mech,1,1,False,False,False,mecharoo_dr,,,False
-Jo-E Bot,1,Mech,1,1,False,False,False,,,,True
-Micro Machine,1,Mech,1,2,False,False,False,,,,False
-Murloc Tidecaller,1,Murloc,1,2,False,False,False,,,murloc_tidecaller_pe,False
-Murloc Tidehunter,1,Murloc,2,1,False,False,False,,,,False
-Murloc Scout,1,Murloc,1,1,False,False,False,,,,True
-Righteous Protector,1,None,1,1,True,False,True,,,,False
-Rockpool Hunter,1,Murloc,2,3,False,False,False,,,,False
-Selfless Hero,1,None,2,1,False,False,False,selfess_hero_dr,,,False
-Voidwalker,1,Demon,1,3,True,False,False,,,,False
-Vulgar Homunculus,1,Demon,2,4,True,False,False,,,,False
-Wrath Weaver,1,None,1,1,False,False,False,,,,False
+Name,Tier,Tribe,Attack,Health,Taunt,Poison,Shield,Deathrattle,StaticEffect,PersonalEffect,Token,isGold
+Alleycat,1,Beast,1,1,False,False,False,,,,False,False
+Alleycat,1,Beast,2,2,False,False,False,,,,False,True
+Tabbycat,1,Beast,1,1,False,False,False,,,,True,False
+Tabbycat,1,Beast,2,2,False,False,False,,,,True,True
+Dire Wolf Alpha,1,Best,2,2,False,False,False,,dire_wolf_alpha_se,,False,False
+Dire Wolf Alpha,1,Best,4,4,False,False,False,,dire_wolf_alpha_se,,False,True
+Mecharoo,1,Mech,1,1,False,False,False,mecharoo_dr,,,False,False
+Mecharoo,1,Mech,2,2,False,False,False,mecharoo_dr,,,False,True
+Jo-E Bot,1,Mech,1,1,False,False,False,,,,True,False
+Jo-E Bot,1,Mech,2,2,False,False,False,,,,True,True
+Micro Machine,1,Mech,1,2,False,False,False,,,,False,False
+Micro Machine,1,Mech,2,4,False,False,False,,,,False,True
+Murloc Tidecaller,1,Murloc,1,2,False,False,False,,,murloc_tidecaller_pe,False,False
+Murloc Tidecaller,1,Murloc,2,4,False,False,False,,,murloc_tidecaller_pe,False,True
+Murloc Tidehunter,1,Murloc,2,1,False,False,False,,,,False,False
+Murloc Tidehunter,1,Murloc,4,2,False,False,False,,,,False,True
+Murloc Scout,1,Murloc,1,1,False,False,False,,,,True,False
+Murloc Scout,1,Murloc,2,2,False,False,False,,,,True,True
+Righteous Protector,1,None,1,1,True,False,True,,,,False,False
+Righteous Protector,1,None,2,2,True,False,True,,,,False,True
+Rockpool Hunter,1,Murloc,2,3,False,False,False,,,,False,False
+Rockpool Hunter,1,Murloc,4,6,False,False,False,,,,False,True
+Selfless Hero,1,None,2,1,False,False,False,selfess_hero_dr,,,False,False
+Selfless Hero,1,None,4,2,False,False,False,selfess_hero_dr,,,False,True
+Voidwalker,1,Demon,1,3,True,False,False,,,,False,False
+Voidwalker,1,Demon,2,6,True,False,False,,,,False,True
+Vulgar Homunculus,1,Demon,2,4,True,False,False,,,,False,False
+Vulgar Homunculus,1,Demon,4,8,True,False,False,,,,False,True
+Wrath Weaver,1,None,1,1,False,False,False,,,,False,False
+Wrath Weaver,1,None,2,2,False,False,False,,,,False,True

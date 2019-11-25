@@ -22,6 +22,7 @@ types = {
     "StaticEffect" : str,
     "PersonalEffect" : str,
     "Token" : parse_bool,
+    "isGold" : parse_bool,
     }
 
 class MinionRepository:
@@ -37,6 +38,7 @@ class MinionRepository:
         self.header = self.rawMinions.pop(0)
 
         self.minionSpecs = {}
+        self.goldMinionSpecs = {}
         for rawMinion in self.rawMinions:
             minionSpec = {}
             for i in range(len(rawMinion)):
@@ -44,11 +46,17 @@ class MinionRepository:
                 dataType = types[specName]
                 dataValue = dataType(rawMinion[i])
                 minionSpec[specName] = dataValue
-            self.minionSpecs[minionSpec["Name"]] = minionSpec
+            if minionSpecs["isGold"]:
+                self.goldMinionSpecs[minionSpec["Name"]] = minionSpec
+            else:
+                self.minionSpecs[minionSpec["Name"]] = minionSpec
     
     
-    def create_minion(self, name):
-        specs = self.minionSpecs[name]
+    def create_minion(self, name, isGold=False):
+        if isGold:
+            specs = self.goldMinionSpecs[name]
+        else:
+            specs = self.minionSpecs[name]
         specs["Id"] = self._get_id()
         return Minion(self.minionSpecs[name])
         
