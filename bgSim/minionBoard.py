@@ -14,7 +14,7 @@ class MinionBoard():
 
         if not self.activeMinion:
             nextActiveMinion = self.minions[0]
-        elif childMinions := self.check_for_child_minions(self.activeMinion, self.minions): # := := := I AM THE WALRUS := := :=
+        elif childMinions := self._check_for_child_minions(self.activeMinion, self.minions): # := := := I AM THE WALRUS := := :=
             nextActiveMinion = childMinions[0]
         else:
             theoretialAttackOrder = self._get_theoretical_attack_order(self.activeMinion)
@@ -22,7 +22,7 @@ class MinionBoard():
                 if minion in self.minions:
                     nextActiveMinion = minion
                     break
-                elif childMinions := self.check_for_child_minions(minion, self.minions):
+                elif childMinions := self._check_for_child_minions(minion, self.minions):
                     for cMinion in childMinions:
                         if cMinion in self.minions:
                             nextActiveMinion = cMinion
@@ -49,7 +49,7 @@ class MinionBoard():
         if referenceMinion in self.minions:
             self.add_minion_at_index(newMinion, self.minions.index(referenceMinion) + 1) # +1 adds minion to right of its parent
         else:
-            if leftNeighbour := self.get_minions_left_neighbour(referenceMinion):
+            if leftNeighbour := self._get_minions_left_neighbour(referenceMinion):
                 self.add_minion_at_index(newMinion, self.minions.index(leftNeighbour) + 1)
             else:
                 self.add_minion_at_index(newMinion, 0) # Adds to leftmost position if no neighbours can be found
@@ -57,7 +57,7 @@ class MinionBoard():
         print([x.name for x in self.minions])
 
     
-    def get_minions_left_neighbour(self, minion):
+    def _get_minions_left_neighbour(self, minion):
         """
             Uses the board snapshot to return the minion that is now directly to the left of the given minion
             Uses the boardSnapshot rather than the actual board to allow functioning even if the minion is dead
@@ -68,12 +68,11 @@ class MinionBoard():
         
         targetMinion = None
         # Move backwards through list to find nearest living relative
-        for i in range(len(minionsToLeft), 0, -1):
-            referenceMinion = minionToLeft[i]
+        for referenceMinion in minionsToLeft[::-1]:  #[::-1] Reverses the list its applied to
             if referenceMinion in self.minions:
                 targetMinion = referenceMinion
                 break
-            elif childMinions := self.check_for_child_minions(referenceMinion, self.minions):
+            elif childMinions := self._check_for_child_minions(referenceMinion, self.minions):
                 targetMinion = childMinions[-1]
                 break
         
@@ -84,7 +83,7 @@ class MinionBoard():
         return self.activeMinion
     
     
-    def check_for_child_minions(self, minion, minionList):
+    def _check_for_child_minions(self, minion, minionList):
         """
             Scans for minions which spawned from the given minion instance
         """
@@ -136,7 +135,10 @@ class MinionBoard():
             Minions spawned to the right will get to attack in order.
             Both these things makes sense.
             However, if the last minion to attack dies and spawns minions, those minions will attack next.
+            The test file for this class is currently 334 lines long, mostly because of this nonsense
             """
+        
+        print(damnedLogic)
         
         
         

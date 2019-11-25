@@ -33,8 +33,12 @@ class Minion:
         self.staticEffects = []
         self.personalEffects = []
         
+        self.buffs = []
+        
         self.abilities = self._set_initial_abilities(specs)
         self.boardNumber = None
+        
+        self.location = None
     
     def isTribe(self, tribeToCheck):
         """
@@ -81,5 +85,9 @@ class Minion:
                         self.isDead = True
                 if self.currentHealth <= 0:
                     self.isDead = True
-                
+    
+    
+    def update_stats(self):
+        attackBuffs = [x.value for x in self.buffs if x.stat == "attack"]
+        self.attack = self.baseAttack + sum(attackBuffs)
         

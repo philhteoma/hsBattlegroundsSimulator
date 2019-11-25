@@ -1,9 +1,11 @@
+from bgSim.buffs import AttackBuff
+
 class StaticEffect:
     pass
 
 
 class AnthemEffect(StaticEffect):
-    pass
+    effectType="anthem"
 
 
 class DeathEffect(StaticEffect):
@@ -14,16 +16,13 @@ class AttackEffect(StaticEffect):
     pass
 
 
-class OummonEffect(StaticEffect):
+class SummonEffect(StaticEffect):
     pass
 
 
 class OtherEffect(StaticEffect):
     pass
     
-
-
-
 
 class DireWolfAlphaSe(AnthemEffect):
     name = "dire_wolf_alpha_se"
@@ -32,6 +31,13 @@ class DireWolfAlphaSe(AnthemEffect):
     def __init__(self, minion):
         self.minionId = minion
         self.minion = minion
+        
+        self.attackBuff = 1
+        self.condition = lambda minion: minion.location in [self.minion.location + 1, self.minion.location - 1]
+    
+    
+    def get_buff(self):
+        return AttackBuff("anthem", 1)
 
 
 classList = [

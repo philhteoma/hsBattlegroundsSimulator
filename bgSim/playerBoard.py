@@ -44,11 +44,14 @@ class PlayerBoard:
     
     
     def update_minion_data(self):
-        self._update_for_lethal_damage()
         self._update_minion_locations()
         self._update_static_effects()
         self._update_personal_effects()
         self._update_deathrattles()
+        self._reset_anthems()
+        self._update_minion_stats()
+        self._update_for_lethal_damage()
+
     
     
     def get_leftmost_minion(self):
@@ -63,6 +66,11 @@ class PlayerBoard:
             return self.minions
     
     
+    def apply_buff(self, minion, buff):
+        minion.buffs.append(buff)
+
+    
+    
     def _update_for_lethal_damage(self):
         for minion in self.minions:
             if minion.health <= 0:
@@ -70,7 +78,7 @@ class PlayerBoard:
     
     def _update_minion_locations(self):
         for minion in self.minions:
-            minion.position = self.minions.index(minion)
+            minion.location = self.minions.index(minion)
     
     
     def _update_static_effects(self):
@@ -89,7 +97,6 @@ class PlayerBoard:
             Method uses minion order left to right, preserves effect order in minions themselves
         """
         self.personalEffects = [effect for minion in self.minions for effect in minion.personalEffects]
-
         
     def _update_deathrattles(self):
         """
@@ -98,4 +105,20 @@ class PlayerBoard:
             Method uses minion order left to right, preserves effect order in minions themselves
         """
         self.deathrattles = [dr for minion in self.minions for dr in minion.deathrattles]
+    
+    
+    def _reset_anthems(self):
+        for minion in self.minions:
+            minion.buffs = [x for x in minion.buffs if x.buffType != "anthem"]
         
+        anthems = [x for x in self.staticEffects if x.effectType == "anthem"]
+        for anthem in anthems:
+            for minion in self.minions:
+                if anthem.condition(minion):
+                    self.apply_buff(minion, anthem.get_buff())
+    
+    
+    def _update_minion_stats(self):
+        for minion in self.minions:
+            minion.update_stats()
+    

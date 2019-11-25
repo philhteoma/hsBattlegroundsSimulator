@@ -1,5 +1,4 @@
 from bgSim.playerBoard import PlayerBoard
-from bgSim.minionRepository import MinionRepository
 from bgSim.combatEvents import get_combat_event
 import random
 
@@ -85,6 +84,7 @@ class GameManager:
         
         for minion in inactiveDead:
             self.get_inactive_board().remove_minion(minion)
+        
                 
     
     def run_full_combat(self, firstPlayer=None):
@@ -109,8 +109,11 @@ class GameManager:
         # Repeat untul the stack is empty after checking for minion death.
         while len(self.combatStack) > 0:
             while len(self.combatStack) > 0:
+                self.refresh_player_boards()
                 self.combat_substep()
             self.check_for_death()
+        
+        self.refresh_player_boards()
     
     
     def combat_substep(self):
