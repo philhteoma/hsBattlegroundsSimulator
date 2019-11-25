@@ -4,7 +4,7 @@ Alleycat,1,Beast,2,2,False,False,False,,,,False,True
 Tabbycat,1,Beast,1,1,False,False,False,,,,True,False
 Tabbycat,1,Beast,2,2,False,False,False,,,,True,True
 Dire Wolf Alpha,1,Best,2,2,False,False,False,,dire_wolf_alpha_se,,False,False
-Dire Wolf Alpha,1,Best,4,4,False,False,False,,dire_wolf_alpha_se,,False,True
+Dire Wolf Alpha,1,Best,4,4,False,False,False,,dire_wolf_alpha_se_gold,,False,True
 Mecharoo,1,Mech,1,1,False,False,False,mecharoo_dr,,,False,False
 Mecharoo,1,Mech,2,2,False,False,False,mecharoo_dr_gold,,,False,True
 Jo-E Bot,1,Mech,1,1,False,False,False,,,,True,False
