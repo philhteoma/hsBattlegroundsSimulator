@@ -22,7 +22,7 @@ Righteous Protector,1,None,2,2,True,False,True,,,,False,True
 Rockpool Hunter,1,Murloc,2,3,False,False,False,,,,False,False
 Rockpool Hunter,1,Murloc,4,6,False,False,False,,,,False,True
 Selfless Hero,1,None,2,1,False,False,False,selfess_hero_dr,,,False,False
-Selfless Hero,1,None,4,2,False,False,False,selfess_hero_dr,,,False,True
+Selfless Hero,1,None,4,2,False,False,False,selfess_hero_dr_gold,,,False,True
 Voidwalker,1,Demon,1,3,True,False,False,,,,False,False
 Voidwalker,1,Demon,2,6,True,False,False,,,,False,True
 Vulgar Homunculus,1,Demon,2,4,True,False,False,,,,False,False
