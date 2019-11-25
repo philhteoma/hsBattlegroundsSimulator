@@ -46,7 +46,7 @@ class MinionRepository:
                 dataType = types[specName]
                 dataValue = dataType(rawMinion[i])
                 minionSpec[specName] = dataValue
-            if minionSpecs["isGold"]:
+            if minionSpec["isGold"]:
                 self.goldMinionSpecs[minionSpec["Name"]] = minionSpec
             else:
                 self.minionSpecs[minionSpec["Name"]] = minionSpec
