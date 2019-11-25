@@ -6,7 +6,7 @@ Tabbycat,1,Beast,2,2,False,False,False,,,,True,True
 Dire Wolf Alpha,1,Best,2,2,False,False,False,,dire_wolf_alpha_se,,False,False
 Dire Wolf Alpha,1,Best,4,4,False,False,False,,dire_wolf_alpha_se,,False,True
 Mecharoo,1,Mech,1,1,False,False,False,mecharoo_dr,,,False,False
-Mecharoo,1,Mech,2,2,False,False,False,mecharoo_dr,,,False,True
+Mecharoo,1,Mech,2,2,False,False,False,mecharoo_dr_gold,,,False,True
 Jo-E Bot,1,Mech,1,1,False,False,False,,,,True,False
 Jo-E Bot,1,Mech,2,2,False,False,False,,,,True,True
 Micro Machine,1,Mech,1,2,False,False,False,,,,False,False
@@ -29,3 +29,41 @@ Vulgar Homunculus,1,Demon,2,4,True,False,False,,,,False,False
 Vulgar Homunculus,1,Demon,4,8,True,False,False,,,,False,True
 Wrath Weaver,1,None,1,1,False,False,False,,,,False,False
 Wrath Weaver,1,None,2,2,False,False,False,,,,False,True
+Annoy-o-Tron,2,Mech,1,2,True,False,True,,,,False,False
+Annoy-o-Tron,2,Mech,2,4,True,False,True,,,,False,True
+Coldlight Seer,2,Murloc,2,3,False,False,False,,,,False,False
+Coldlight Seer,2,Murloc,4,6,False,False,False,,,,False,True
+Harvest Golem,2,Mech,2,3,False,False,False,harvest_golem_dr,,,False,False
+Harvest Golem,2,Mech,4,6,False,False,False,harvest_golem_dr_gold,,,False,True
+Damaged Golem,1,Mech,2,1,False,False,False,,,,True,False
+Damaged Golem,1,Mech,4,2,False,False,False,,,,True,True
+Kaboom Bot,2,Mech,2,2,False,False,False,kaboom_bot_dr,,,False,False
+Kaboom Bot,2,Mech,4,4,False,False,False,kaboom_bot_dr_gold,,,False,True
+Kindly Grandmother,2,Beast,1,1,False,False,False,kindly_grandmother_dr,,,False,False
+Kindly Grandmother,2,Beast,2,2,False,False,False,kindly_grandmother_dr_gold,,,False,True
+Big Bad Wolf,1,Beast,3,2,False,False,False,,,,True,False
+Big Bad Wolf,1,Beast,6,4,False,False,False,,,,True,True
+Metaltooth Leaper,2,Mech,3,3,False,False,False,,,,False,False
+Metaltooth Leaper,2,Mech,6,6,False,False,False,,,,False,True
+Mounted Raptor,2,Beast,3,2,False,False,False,mounted_raptor_dr,,,False,False
+Mounted Raptor,2,Beast,6,4,False,False,False,mounted_raptor_dr_gold,,,False,True
+Murloc Warleader,2,Murloc,3,3,False,False,False,,murloc_warleader_se,,False,False
+Murloc Warleader,2,Murloc,6,6,False,False,False,,murloc_warleader_se_gold,,False,True
+Nathrezim Overseer,2,Demon,2,4,False,False,False,,,,False,True
+Nathrezim Overseer,2,Demon,4,8,False,False,False,,,,True,True
+Nightmare Amalgam,2,All,3,4,False,False,False,,,,False,False
+Nightmare Amalgam,2,All,6,8,False,False,False,,,,False,True
+Old Murk-Eye,2,Murloc,2,4,False,False,False,,old_murkeye_se,,False,False
+Old Murk-Eye,2,Murloc,4,8,False,False,False,,old_murkeye_se_gold,,False,True
+Pogo-Hopper,2,Mech,1,1,False,False,False,,,,False,False
+Pogo-Hopper,2,Mech,2,2,False,False,False,,,,False,True
+Rat Pack,2,Beast,2,2,False,False,False,rat_pack_dr,,,False,False
+Rat Pack,2,Beast,4,4,False,False,False,rat_pack_dr_gold,,,False,True
+Rat,1,Beast,1,1,False,False,False,,,,True,False
+Rat,1,Beast,2,2,False,False,False,,,,True,True
+Shielded Minibot,2,Mech,2,2,False,False,True,,,,False,False
+Shielded Minibot,2,Mech,4,4,False,False,True,,,,False,True
+Spawn of N'Zoth,2,None,2,2,False,False,False,spawn_of_nzoth_dr,,,False,False
+Spawn of N'Zoth,2,None,4,4,False,False,False,spawn_of_nzoth_dr,,,False,True
+Zoobot,2,Mech,3,3,False,False,False,,,,False,False
+Zoobot,2,Mech,6,6,False,False,False,,,,False,True
