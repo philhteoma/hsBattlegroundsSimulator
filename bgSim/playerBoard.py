@@ -73,7 +73,7 @@ class PlayerBoard:
     
     def _update_for_lethal_damage(self):
         for minion in self.minions:
-            if minion.health <= 0:
+            if minion.currentHealth <= 0:
                 minion.isDead = True
     
     def _update_minion_locations(self):

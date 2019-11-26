@@ -12,7 +12,7 @@ class Minion:
         self.baseAttack = specs["Attack"]
         self.attack = specs["Attack"]
         self.baseHealth = specs["Health"]
-        self.health = specs["Health"]
+        self.maxHealth = specs["Health"]
         self.currentHealth = specs["Health"]
         self.isGolden = False
         
@@ -88,6 +88,28 @@ class Minion:
     
     
     def update_stats(self):
-        attackBuffs = [x.value for x in self.buffs if x.stat == "attack"]
-        self.attack = self.baseAttack + sum(attackBuffs)
+        attackBuffs = [x for x in self.buffs if x.stat == "attack"]
+        self.attack = self.baseAttack + sum([x.value for x in attackBuffs])
         
+        healthBuffs = [x for x in self.buffs if x.stat == "health"]
+        self.maxHealth = self.baseHealth + sum([x.value for x in healthBuffs])
+        firstTimeHealthBuffs = [x for x in healthBuffs if x.initialBuffUsed == False]
+        self.currentHealth = self.currentHealth + sum([x.value for x in firstTimeHealthBuffs])
+        for buff in firstTimeHealthBuffs:
+            buff.initialBuffUsed = True
+        
+    
+    def recieve_damage(self, damage, damageSource):
+        if self.hasDivineShield:
+            if damage > 0:
+                self.hasDivineShield = False
+        else:
+            startHealth = self.currentHealth
+            self.currentHealth -= damage
+        if self.currentHealth < startHealth:
+            self.onHitTriggers = [x for x in self.personalEffects if x.effectType == "on_damage"]
+            if damageSource.hasPoisonous:
+                if attackingMinion.attack > 0:
+                    self.isDead = True
+            if self.currentHealth <= 0:
+                self.isDead = True

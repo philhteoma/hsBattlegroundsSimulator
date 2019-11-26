@@ -48,10 +48,10 @@ class MinionRepository:
                 dataType = types[specName]
                 dataValue = dataType(rawMinion[i])
                 minionSpec[specName] = dataValue
-            if minionSpec["isGold"]:
-                self.goldMinionSpecs[minionSpec["Name"]] = minionSpec
             for trait in ["Deathrattle", "StaticEffect", "PersonalEffect"]:
                 minionSpec["has{}".format(trait)] = False if minionSpec[trait] == "" else True
+            if minionSpec["isGold"]:
+                self.goldMinionSpecs[minionSpec["Name"]] = minionSpec
             else:
                 self.minionSpecs[minionSpec["Name"]] = minionSpec
     
@@ -72,6 +72,7 @@ class MinionRepository:
     
     
     def create_random_minion(self, **traits):
+        traits["Token"] == False
         validSpecs = self.minionSpecs
         for trait, value in traits.items():
             validSpecs = filter(lambda spec: spec[trait] == value, validSpecs)

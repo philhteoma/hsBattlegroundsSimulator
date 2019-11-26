@@ -26,7 +26,7 @@ class GameManager:
             }
     
     
-    def create_minion(self, minionName, isGolden=False):
+    def create_minion(self, minionName, isGold=False):
         return self.minionRepo.create_minion(minionName)
     
     

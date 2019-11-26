@@ -32,13 +32,14 @@ def print_playerBoard(board):
 
 def get_minion_print_strings(minion):
     lineOne = minion.name + "-" + str(minion.id)
-    lineTwo = "ATK:" + str(minion.attack) + " MaxH:" + str(minion.health) + " H:" + str(minion.currentHealth)
-    lineThree = "".join([
+    lineTwo = "ATK:" + str(minion.attack) + " H:" + str(minion.currentHealth)
+    lineThree = "baseATK:" + str(minion.baseAttack) + " MaxH:" + str(minion.maxHealth)
+    lineFour = "".join([
         "T_" if minion.hasTaunt else "x_",
         "S_" if minion.hasDivineShield else "x_",
         "P" if minion.hasPoisonous else "x",
         ])
-    combined = [lineOne, lineTwo, lineThree]
+    combined = [lineOne, lineTwo, lineThree, lineFour]
     
     maxLength = max([len(x) for x in combined])
     padded = [pad_string(x, maxLength) for x in combined]
@@ -61,6 +62,9 @@ if __name__ == "__main__":
     manager.assign_minion_to_board(repo.create_minion("Selfless Hero"), 1)
     manager.assign_minion_to_board(repo.create_minion("Mecharoo"), 2)
     manager.assign_minion_to_board(repo.create_minion("Dire Wolf Alpha"), 2)
+    manager.assign_minion_to_board(repo.create_minion("Mecharoo", isGold=False), 2)
+    manager.assign_minion_to_board(repo.create_minion("Mecharoo"), 2)
+
     
     print("Starting Boards")
     print("------------------")
