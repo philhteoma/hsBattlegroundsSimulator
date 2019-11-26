@@ -91,8 +91,8 @@ def test_receive_attack_simple():
     assert(minionTwo.currentHealth == 0)
     assert(minionTwo.isDead)
     
-    assert(minionOne.health == 3)
-    assert(minionTwo.health == 1)
+    assert(minionOne.maxHealth == 3)
+    assert(minionTwo.maxHealth == 1)
 
 
 def test_receive_poison_attack():

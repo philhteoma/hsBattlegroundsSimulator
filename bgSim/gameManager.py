@@ -10,8 +10,8 @@ class GameManager:
 
         self.minionRepo = minionRepo
                         
-        self.boardOne = PlayerBoard(1)
-        self.boardTwo = PlayerBoard(2)
+        self.boardOne = PlayerBoard(self, 1)
+        self.boardTwo = PlayerBoard(self, 2)
         
         self._boards = {
             1 : self.boardOne,

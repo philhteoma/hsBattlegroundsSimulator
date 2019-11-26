@@ -35,11 +35,23 @@ class PersonalOverkill(PersonalEffect):
 
 class PersonalOnKill(PersonalEffect):
     pass
+
+
+
+class MurlocTidecallerPe(PersonalMinionEnters):
+    name = "murloc_tidecaller_pe"
     
+
+
+class MurlocTidecallerPeGold(PersonalMinionEnters):
+    name = "murloc_tidecaller_pe_gold"
+
 
 
 
 classList = [
+    MurlocTidecallerPe,
+    MurlocTidecallerPeGold,
     ]
 
 personalEffects = {x.name: x for x in classList}

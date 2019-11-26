@@ -49,8 +49,8 @@ Mounted Raptor,3,2,Beast,3,2,False,False,False,mounted_raptor_dr,,,False,False
 Mounted Raptor,3,2,Beast,6,4,False,False,False,mounted_raptor_dr_gold,,,False,True
 Murloc Warleader,3,2,Murloc,3,3,False,False,False,,murloc_warleader_se,,False,False
 Murloc Warleader,3,2,Murloc,6,6,False,False,False,,murloc_warleader_se_gold,,False,True
-Nathrezim Overseer,0,2,Demon,2,4,False,False,False,,,,False,True
-Nathrezim Overseer,0,2,Demon,4,8,False,False,False,,,,True,True
+Nathrezim Overseer,0,2,Demon,2,4,False,False,False,,,,False,False
+Nathrezim Overseer,0,2,Demon,4,8,False,False,False,,,,False,True
 Nightmare Amalgam,3,2,All,3,4,False,False,False,,,,False,False
 Nightmare Amalgam,3,2,All,6,8,False,False,False,,,,False,True
 Old Murk-Eye,4,2,Murloc,2,4,False,False,False,,old_murkeye_se,,False,False

@@ -1,7 +1,9 @@
 from bgSim.minionBoard import MinionBoard
 
 class PlayerBoard:
-    def __init__(self, boardNumber):
+    def __init__(self, manager, boardNumber):
+        self.manager = manager # This feels messy but is required for Old Murkeye buff as old murkeye looks at opponents board
+        
         self.boardNumber = boardNumber
         self.minions = MinionBoard(self)
         self.deathrattles = []
@@ -115,7 +117,7 @@ class PlayerBoard:
         for anthem in anthems:
             for minion in self.minions:
                 if anthem.condition(minion):
-                    self.apply_buff(minion, anthem.get_buff())
+                    self.apply_buff(minion, anthem.get_buff(self.manager))
     
     
     def _update_minion_stats(self):
