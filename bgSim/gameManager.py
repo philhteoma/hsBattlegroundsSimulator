@@ -30,6 +30,12 @@ class GameManager:
         return self.minionRepo.create_minion(minionName)
     
     
+    def create_random_minion(self, **traits):
+        if "isGold" not in traits.keys():
+            traits["isGold"] == False
+        return self.minionRepo.get_random_minion(**traits)
+    
+    
     def assign_minion_to_board(self, minion, boardNumber, index=-1):
         if index == -1:
             self._boards[boardNumber].add_minion_to_right(minion)

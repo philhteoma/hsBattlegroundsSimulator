@@ -1,5 +1,6 @@
 from bgSim.minion import Minion
 import csv
+import random
 
 def parse_bool(string):
     if string == "True":
@@ -7,10 +8,11 @@ def parse_bool(string):
     elif string == "False":
         return False
     else:
-        raise ValueError("String must be either 'True' or 'False'")
+        raise ValueError("String must be either 'True' or 'False', not '{}'".format(string))
 
 types = {
     "Name" : str,
+    "Cost" : int,
     "Tier" : int,
     "Tribe" : str,
     "Attack" : int,
@@ -48,6 +50,8 @@ class MinionRepository:
                 minionSpec[specName] = dataValue
             if minionSpec["isGold"]:
                 self.goldMinionSpecs[minionSpec["Name"]] = minionSpec
+            for trait in ["Deathrattle", "StaticEffect", "PersonalEffect"]:
+                minionSpec["has{}".format(trait)] = False if minionSpec[trait] == "" else True
             else:
                 self.minionSpecs[minionSpec["Name"]] = minionSpec
     
@@ -65,3 +69,11 @@ class MinionRepository:
         newId = self.currentId
         self.currentId += 1
         return newId
+    
+    
+    def create_random_minion(self, **traits):
+        validSpecs = self.minionSpecs
+        for trait, value in traits.items():
+            validSpecs = filter(lambda spec: spec[trait] == value, validSpecs)
+    
+        return random.choice(validSpecs)
