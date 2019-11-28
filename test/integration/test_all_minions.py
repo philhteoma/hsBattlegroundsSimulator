@@ -19,3 +19,5 @@ def test_all_minions():
     
     for minion in minionsToTest:
         newMinion = repo.create_minion(minion, isGold=True)
+
+    

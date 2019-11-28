@@ -5,6 +5,7 @@ def get_minion_specs(**kwargs):
     defaultMinionSpecs = {
             "Id" : 1,
             "Name" : "TestMinion",
+            "Cost" : 1,
             "Tier" : 1,
             "Tribe" : None,
             "Attack" : 1,
@@ -16,6 +17,7 @@ def get_minion_specs(**kwargs):
             "StaticEffect" : "",
             "PersonalEffect" : "",
             "Token" : False,
+            "isGold" : False,
             }
 
     for key in defaultMinionSpecs.keys():

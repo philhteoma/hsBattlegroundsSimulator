@@ -1,5 +1,5 @@
-from bgSim.buffs import AttackBuff
 
+from bgSim.buffs import AttackBuff
 class StaticEffect:
     pass
 

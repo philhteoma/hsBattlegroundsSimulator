@@ -50,6 +50,7 @@ class MinionRepository:
                 minionSpec[specName] = dataValue
             for trait in ["Deathrattle", "StaticEffect", "PersonalEffect"]:
                 minionSpec["has{}".format(trait)] = False if minionSpec[trait] == "" else True
+            
             if minionSpec["isGold"]:
                 self.goldMinionSpecs[minionSpec["Name"]] = minionSpec
             else:
@@ -62,7 +63,7 @@ class MinionRepository:
         else:
             specs = self.minionSpecs[name]
         specs["Id"] = self._get_id()
-        return Minion(self.minionSpecs[name])
+        return Minion(specs)
         
         
     def _get_id(self):
@@ -72,9 +73,14 @@ class MinionRepository:
     
     
     def create_random_minion(self, **traits):
-        traits["Token"] == False
-        validSpecs = self.minionSpecs
+        traits["Token"] = False
+        if traits["isGold"]:
+            validSpecs = list(self.goldMinionSpecs.items())
+        else:
+            validSpecs = list(self.minionSpecs.items())
         for trait, value in traits.items():
-            validSpecs = filter(lambda spec: spec[trait] == value, validSpecs)
-    
-        return random.choice(validSpecs)
+            validSpecs = list(filter(lambda spec: spec[1][trait] == value, validSpecs))
+        
+        choice = random.choice([x[1] for x in validSpecs])
+        choice["Id"] = self._get_id()
+        return Minion(choice)

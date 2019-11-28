@@ -56,7 +56,6 @@ class MecharooDrGold(SummonDeathrattle):
         super().summon_minion(minionToSpawn, manager)
 
 
-
 class SelflessHeroDr(BuffDeathrattle):
     name = "selfess_hero_dr"
     text = "Give a random friendly minion Divine Shield."
@@ -161,7 +160,7 @@ class KaboomBotDr(AttackDeathrattle):
     
     
     def run(self, manager):
-        targetBoard = 1 if minion.boardNumber == 2 else 2
+        targetBoard = 1 if self.minion.boardNumber == 2 else 2
         targets = manager.get_player_board(targetBoard).minions
         if len(targets) > 0:
             target = random.choice(targets)
@@ -177,7 +176,7 @@ class KaboomBotDrGold(AttackDeathrattle):
     
     
     def run(self, manager):
-        targetBoard = 1 if minion.boardNumber == 2 else 2
+        targetBoard = 1 if self.minion.boardNumber == 2 else 2
         targets = manager.get_player_board(targetBoard).minions
         if len(targets) > 0:
             target = random.choice(targets)
@@ -202,7 +201,7 @@ class MountedRaptorDr(SummonDeathrattle):
             "isGold" : False,
             }
         
-        minionToSpawn = manager.get_random_minion(**conditions)
+        minionToSpawn = manager.create_random_minion(**conditions)
         super().summon_minion(minionToSpawn, manager)
 
 
@@ -217,12 +216,12 @@ class MountedRaptorDrGold(SummonDeathrattle):
     def run(self, manager):
         conditions = {
             "Cost" : 1,
-            "isGold" : False,
+            "isGold" : True,
             }
         
-        minionToSpawn = manager.get_random_minion(**conditions)
+        minionToSpawn = manager.create_random_minion(**conditions)
         super().summon_minion(minionToSpawn, manager)
-        minionToSpawn = manager.get_random_minion(**conditions)
+        minionToSpawn = manager.create_random_minion(**conditions)
         super().summon_minion(minionToSpawn, manager)
 
 

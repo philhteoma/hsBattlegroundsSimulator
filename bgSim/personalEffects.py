@@ -1,4 +1,6 @@
 class PersonalEffect:
+    effectType = "Generic"
+    
     name = "Unnamed Personal Effect"
     def __init__(self, owner):
         self.ownerId = owner.id
@@ -35,7 +37,6 @@ class PersonalOverkill(PersonalEffect):
 
 class PersonalOnKill(PersonalEffect):
     pass
-
 
 
 class MurlocTidecallerPe(PersonalMinionEnters):

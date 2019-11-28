@@ -7,6 +7,7 @@ class Minion:
         self.id = specs["Id"]
         
         self.name = specs["Name"]
+        self.cost = specs["Cost"]
         self.tier = specs["Tier"]
         self.tribe = specs["Tribe"]
         self.baseAttack = specs["Attack"]
@@ -14,12 +15,11 @@ class Minion:
         self.baseHealth = specs["Health"]
         self.maxHealth = specs["Health"]
         self.currentHealth = specs["Health"]
-        self.isGolden = False
+        self.isGold = specs["isGold"]
         
         self.hasTaunt = specs["Taunt"]
         self.hasPoisonous = specs["Poison"]
         self.hasDivineShield = specs["Shield"]
-        
         
         self.hasAttacked = False
         self.isDead = False
@@ -109,7 +109,7 @@ class Minion:
         if self.currentHealth < startHealth:
             self.onHitTriggers = [x for x in self.personalEffects if x.effectType == "on_damage"]
             if damageSource.hasPoisonous:
-                if attackingMinion.attack > 0:
+                if damage > 0:
                     self.isDead = True
             if self.currentHealth <= 0:
                 self.isDead = True

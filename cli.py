@@ -63,7 +63,7 @@ if __name__ == "__main__":
     manager.assign_minion_to_board(repo.create_minion("Mecharoo"), 2)
     manager.assign_minion_to_board(repo.create_minion("Dire Wolf Alpha"), 2)
     manager.assign_minion_to_board(repo.create_minion("Mecharoo", isGold=False), 2)
-    manager.assign_minion_to_board(repo.create_minion("Mecharoo"), 2)
+    manager.assign_minion_to_board(repo.create_minion("Mecharoo", isGold=True), 2)
 
     
     print("Starting Boards")
